@@ -1,6 +1,11 @@
 name: Create GitHub Tag
 
 on:
+    # Triggers when 'Main CI' workflow completes
+    workflow_run:
+        workflows: terraform-hello
+        types:
+          - completed
     workflow_dispatch:
        inputs:
          version:
