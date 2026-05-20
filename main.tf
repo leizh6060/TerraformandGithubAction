@@ -1,3 +1,8 @@
+variable "ssh_public_key" {
+  description = "SSH public key for the VM admin"
+  type        = string
+}
+
 terraform {
   required_providers {
     azurerm = {
