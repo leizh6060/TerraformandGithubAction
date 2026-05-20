@@ -1,0 +1,31 @@
+name: 'Terraform Destroy Azure VM'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.clientId }}
+      ARM_CLIENT_SECRET: ${{ secrets.clientSecret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.subscriptionId }}
+      ARM_TENANT_ID: ${{ secrets.tenantId }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
