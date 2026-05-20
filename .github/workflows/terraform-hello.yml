@@ -1,7 +1,4 @@
  name: 'Terraform Hello World'
- env:
-       TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-       # ... your other ARM variables ...
  on:
    push:
      branches: [ "main" ]
@@ -16,6 +13,7 @@
        ARM_CLIENT_SECRET: ${{ secrets.clientSecret }}
        ARM_SUBSCRIPTION_ID: ${{ secrets.subscriptionId }}
        ARM_TENANT_ID: ${{ secrets.tenantId }}
+       TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
 
      steps:
        - name: Checkout Code
